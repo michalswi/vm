@@ -7,7 +7,7 @@ locals {
   vnet_name    = var.source_vnet_name
   ip_whitelist = var.ip_whitelist
   vm_size      = var.vm_size
-
+  identity_id  = var.identity_id
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsgsubnet" {
@@ -76,7 +76,8 @@ resource "azurerm_linux_virtual_machine" "this" {
   }
 
   identity {
-    type = "SystemAssigned"
+    type         = "SystemAssigned, UserAssigned"
+    identity_ids = local.identity_id
   }
 
   tags = local.tags

@@ -33,3 +33,8 @@ variable "ip_whitelist" {
   description = "IP address allowed to ssh"
   type        = list(string)
 }
+
+variable "identity_id" {
+  description = "Managed Service Identity id."
+  type        = list(string)
+}
