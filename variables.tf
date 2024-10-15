@@ -34,7 +34,6 @@ variable "ip_whitelist" {
   type        = list(string)
 }
 
-variable "identity_id" {
-  description = "Managed Service Identity id."
-  type        = list(string)
+variable "key_vault_id" {
+  type = string
 }

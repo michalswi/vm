@@ -7,7 +7,7 @@ locals {
   vnet_name    = var.source_vnet_name
   ip_whitelist = var.ip_whitelist
   vm_size      = var.vm_size
-  identity_id  = var.identity_id
+  key_vault_id = var.key_vault_id
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsgsubnet" {
@@ -76,8 +76,7 @@ resource "azurerm_linux_virtual_machine" "this" {
   }
 
   identity {
-    type         = "SystemAssigned, UserAssigned"
-    identity_ids = local.identity_id
+    type = "SystemAssigned"
   }
 
   tags = local.tags
@@ -98,4 +97,10 @@ resource "local_file" "ssh_public_key" {
   content         = tls_private_key.private_key.public_key_openssh
   file_permission = "0644"
   filename        = "./test.pub"
+}
+
+resource "azurerm_role_assignment" "kv_access" {
+  principal_id         = azurerm_linux_virtual_machine.this.identity[0].principal_id
+  role_definition_name = "Key Vault Secrets User"
+  scope                = local.key_vault_id
 }
