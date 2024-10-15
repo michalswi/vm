@@ -3,8 +3,8 @@ locals {
   name         = local.name
   location     = var.location
   rg_name      = var.rg_name
-  subnet_id    = var.subnet_id
-  vnet_name    = var.vnet_name
+  subnet_id    = var.source_subnet_id
+  vnet_name    = var.source_vnet_name
   ip_whitelist = var.ip_whitelist
   vm_size      = var.vm_size
 

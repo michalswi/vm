@@ -21,11 +21,11 @@ variable "vm_size" {
   default = "Standard_B1s"
 }
 
-variable "subnet_id" {
+variable "source_subnet_id" {
   type = string
 }
 
-variable "vnet_name" {
+variable "source_vnet_name" {
   type = string
 }
 
