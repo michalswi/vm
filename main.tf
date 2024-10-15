@@ -1,6 +1,6 @@
 locals {
   tags         = var.tags
-  name         = local.name
+  name         = var.name
   location     = var.location
   rg_name      = var.rg_name
   subnet_id    = var.source_subnet_id
@@ -49,14 +49,14 @@ resource "azurerm_linux_virtual_machine" "this" {
   location            = local.location
   size                = local.vm_size
 
-  admin_username = "test"
+  admin_username = "oneav"
 
   admin_ssh_key {
-    username   = "test"
+    username   = "oneav"
     public_key = local_file.ssh_public_key.content
   }
 
-  computer_name = "test"
+  computer_name = "oneav"
 
   network_interface_ids = [
     azurerm_network_interface.nic.id
